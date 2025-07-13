@@ -8,9 +8,23 @@ dotenv.config();
 
 const app = express();
 
+// CORS configuration updated
+app.use(cors({
+origin: [
+'http://localhost:3000',
+'https://quickauth-1.onrender.com'
+],
+credentials: true
+}));
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// updated
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Backend is working!' });
+});
 
 // Database connection with better error handling
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mern_auth', {
